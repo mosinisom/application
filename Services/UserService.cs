@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using SqlKata.Execution;
 
-class UserService
+public class UserService
 {
     private readonly IDBQueryProxy _queryProxy;
 
@@ -11,8 +12,13 @@ class UserService
 
     public bool CheckExistance(string email) =>
         _queryProxy.Create().Query()
-            .From("users")
+            .From("employees")
             .Where("email", email)
             .Exists();
+
+    public void AddEmployee(Dictionary<string, object> user) =>
+        _queryProxy.Create().Query()
+            .From("employees")
+            .Insert(user);
 
 }

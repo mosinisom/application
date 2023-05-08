@@ -10,7 +10,8 @@ namespace application;
 
 public partial class App : Application
 {
-    public IServiceProvider _services {get; set;}
+    public static IServiceProvider _services {get; set;}
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -20,10 +21,7 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+            desktop.MainWindow = new MainWindow();
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -38,18 +36,19 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
         
-        services.AddTransient<MainWindow>();
-        services.AddTransient<PostgresProxy>();
+        //services.Configure<UserServiceSettings>(builder.Configuration.GetSection("UserServiceSettings"));
+
+        services.AddTransient<IDBQueryProxy, PostgresProxy>();
+        services.AddTransient<UserService>();
+        services.AddTransient<Data>();
+        services.AddTransient<MainWindowViewModel>();
         return services;
     }
 
     public override void RegisterServices()
     {
-
         ConfigureServiceProvider();
         base.RegisterServices();
-
-
     }
 
 }

@@ -1,9 +1,3 @@
-//   ProjectID SERIAL PRIMARY KEY,
-//   ProjectName VARCHAR,
-//   StartDate DATE,
-//   EndDate DATE
-
-
 class Project
 {
     public int ProjectID { get; set; }

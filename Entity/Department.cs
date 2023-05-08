@@ -1,7 +1,3 @@
-//   DepartmentID SERIAL PRIMARY KEY,
-//   DepartmentName VARCHAR,
-//   ManagerID INTEGER
-
 class Department
 {
     public int DepartmentID { get; set; }

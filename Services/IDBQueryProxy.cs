@@ -1,6 +1,6 @@
 using SqlKata.Execution;
 
-interface IDBQueryProxy
+public interface IDBQueryProxy
 {
     QueryFactory Create();
 }

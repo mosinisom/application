@@ -1,9 +1,3 @@
-//   ParticipationID SERIAL PRIMARY KEY,
-//   EmployeeID INTEGER,
-//   ProjectID INTEGER,
-//   StartDate DATE,
-//   EndDate DATE
-
 class ProjectParticipation
 {
     public int ParticipationID { get; set; }
