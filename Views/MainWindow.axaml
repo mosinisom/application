@@ -14,6 +14,29 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding str}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    <StackPanel Orientation="Vertical" Spacing="4">
+    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    <WrapPanel HorizontalAlignment="Center" Margin="0 16 0 0"
+               MaxWidth="660">
+      <WrapPanel.Styles>
+        <Style Selector="ComboBox">
+          <Setter Property="Width" Value="350" />
+          <Setter Property="Margin" Value="10" />
+        </Style>
+      </WrapPanel.Styles>
+      <ComboBox PlaceholderText="Кто ты сегодня?"
+            SelectedIndex="0" 
+            Items="{Binding emails}"              
+            SelectedItem="{Binding SelectedEmail}">
+      </ComboBox>
+
+
+    </WrapPanel>
+      <!-- show selectedEmployee -->
+        <TextBlock Text="{Binding SelectedEmail}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+  </StackPanel>
 
 </Window>

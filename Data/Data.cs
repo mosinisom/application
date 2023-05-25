@@ -31,9 +31,11 @@ public class Data
 
     public bool CheckExistance(string email) { return _userService.CheckExistance(email);}
 
-    public void AddEmployee(Dictionary<string, object> user) { _userService.AddEmployee(user);}
+    public void AddEmployee(Employee user) { _userService.AddEmployee(user);}
 
     public string MyData { get; set; } = "Hello World";
+
+    public List<Employee> GetEmployees() { return _userService.GetEmployees();}
 
 
 
