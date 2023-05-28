@@ -1,4 +1,4 @@
-class ProjectParticipation
+public class ProjectParticipation
 {
     public int ParticipationID { get; set; }
     public int EmployeeID { get; set; }

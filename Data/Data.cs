@@ -37,7 +37,22 @@ public class Data
 
     public List<Employee> GetEmployees() { return _userService.GetEmployees();}
 
+    public void UpdateEmployee(Employee employee) { _userService.UpdateEmployee(employee);}
 
+    public void DeleteEmployee(Employee employee) { _userService.DeleteEmployee(employee);}
 
+    public Employee GetEmployeeById(int id) { return _userService.GetEmployeeById(id);}
+
+    public Employee GetEmployeeByEmail(string email) { return _userService.GetEmployeeByEmail(email);}
+
+    public List<Employee> GetEmployeesByDepartmentId(int departmentId) { return _userService.GetEmployeesByDepartmentId(departmentId);}
+
+    // public List<Department> GetDepartments() { return departments;}  
+
+    public List<Employee> GetEmployeesByPositionId(int positionId) { return _userService.GetEmployeesByPositionId(positionId);}
+
+    public List<Employee> GetEmployeesByProjectId(int projectId) { return _userService.GetEmployeesByProjectId(projectId);}
+
+    public void attendWork(int employeeid) { _userService.attendWork(employeeid);}
 
 }

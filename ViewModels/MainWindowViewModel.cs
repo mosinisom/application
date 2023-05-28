@@ -6,10 +6,15 @@ namespace application.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public string Greeting => "Добро пожаловать!";
-
+    private List<Employee> _emloyeeitems;
+    private Employee _selectedEmployee;
+    private string _selectedEmail = "alexmosin@inbox.ru";
     public string email { get; set; } = "alexmosin@inbox.ru";
-
     private readonly Data _data;
+
+
+
+
 
     public MainWindowViewModel(Data data)
     {
@@ -17,22 +22,11 @@ public class MainWindowViewModel : ViewModelBase
         EmployeeItems = _data.GetEmployees();
     }
 
-
     public string MyData
     {
         get => _data.MyData;
         set => _data.MyData = value;
     }
-
-    public bool CheckExistance() {
-        return _data.CheckExistance("alexmosin@inbox.ru");
-    }
-
-    public string str //= CheckExistance().ToString();
-    {
-        get => _data.CheckExistance("alexmosin@inbox.ru").ToString();
-    }
-
 
     public List<string> emails
     {
@@ -47,23 +41,32 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private string _selectedEmail = "alexmosin@inbox.ru";
 
-    public string SelectedEmail
-    {
-        get => _selectedEmail;
-        set => this.RaiseAndSetIfChanged(ref _selectedEmail, value);
-    }
-
-    private List<Employee> _emloyeeitems;
     public List<Employee> EmployeeItems
     {
         get => _emloyeeitems;
         set => this.RaiseAndSetIfChanged(ref _emloyeeitems, value);
     }
 
-    // Свойство, которое будет хранить выбранный элемент
-    private Employee _selectedEmployee;
+    public string SelectedEmail
+    {
+        get => _selectedEmail;
+        set {
+            this.RaiseAndSetIfChanged(ref _selectedEmail, value);
+            UpdateSelectedEmployee();
+        }
+    }
+
+
+    private void UpdateSelectedEmployee()
+    {
+        SelectedEmployee = EmployeeItems.Find(x => x.Email == SelectedEmail);
+        _data.attendWork(SelectedEmployee.EmployeeID);
+    }
+     
+    
+
+
     public Employee SelectedEmployee
     {
         get => _selectedEmployee;

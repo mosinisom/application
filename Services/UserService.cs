@@ -75,5 +75,14 @@ public class UserService
             .Join("employees", "projectparticipation.employeeid", "employees.employeeid")
             .Get<Employee>().ToList();
 
+    public void attendWork(int employee) =>
+        _queryProxy.Create().Query()
+            .From("employeeattendance")
+            .Insert(new EmployeeAttendance
+            {
+                employeeid = employee,
+                attendancedate = System.DateTime.Now
+            });
+
 
 }
