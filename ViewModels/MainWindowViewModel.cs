@@ -23,14 +23,8 @@ public class MainWindowViewModel : ViewModelBase
         _data = data;
         EmployeeItems = _data.GetEmployees();
 
-        NewEmployee.dateofbirth = DateTime.Now - TimeSpan.FromDays(365 * 18);
-        NewEmployee.hiredate = DateTime.Now;
-    }
-
-    public string MyData
-    {
-        get => _data.MyData;
-        set => _data.MyData = value;
+        // NewEmployee.dateofbirth = DateTime.Now - TimeSpan.FromDays(365 * 18);
+        // NewEmployee.hiredate = DateTime.Now;
     }
 
     public List<string> emails
@@ -82,6 +76,7 @@ public class MainWindowViewModel : ViewModelBase
         get => _newEmployee;
         set => this.RaiseAndSetIfChanged(ref _newEmployee, value);
     }
+
 
     public void AddEmployee()
     {

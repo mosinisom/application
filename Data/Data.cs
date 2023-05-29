@@ -4,55 +4,48 @@ using System.Collections.Generic;
 public class Data
 {
     UserService _userService;
-    Employee userEmployee = new Employee();
-    List<Department> departments = new List<Department>();
-    List<Position> positions = new List<Position>();
-    List<Project> projects = new List<Project>();
-    List<ProjectParticipation> projectParticipations = new List<ProjectParticipation>();
+    // Employee userEmployee = new Employee();
+    // List<Department> departments = new List<Department>();
+    // List<Position> positions = new List<Position>();
+    // List<Project> projects = new List<Project>();
+    // List<ProjectParticipation> projectParticipations = new List<ProjectParticipation>();
 
-    public Data (UserService userService)
+    public Data(UserService userService)
     {
         _userService = userService;
     }
 
-    // string email = "alexmosin@inbox.ru";
+    // Проверка на существование пользователя с таким email
+    public bool CheckExistance(string email) { return _userService.CheckExistance(email); }
 
-    Dictionary<string, object> user = new Dictionary<string, object>()
-    {
-        {"firstname", "Alex"},
-        {"lastname", "Mosin"},
-        {"email", "mosin@inbox.ru"},
-        {"phonenumber", "1234567890"},
-        {"dateofbirth", "1999-01-01"},
-        {"hiredate", "2021-01-01"},
-        {"departmentid", 1},
-        {"positionid", 1}
-    };
+    // Добавление нового сотрудника
+    public void AddEmployee(Employee user) { _userService.AddEmployee(user); }
 
-    public bool CheckExistance(string email) { return _userService.CheckExistance(email);}
+    // Получение списка всех сотрудников
+    public List<Employee> GetEmployees() { return _userService.GetEmployees(); }
 
-    public void AddEmployee(Employee user) { _userService.AddEmployee(user);}
+    // Обновление информации о сотруднике
+    public void UpdateEmployee(Employee employee) { _userService.UpdateEmployee(employee); }
 
-    public string MyData { get; set; } = "Hello World";
+    // Удаление сотрудника
+    public void DeleteEmployee(Employee employee) { _userService.DeleteEmployee(employee); }
 
-    public List<Employee> GetEmployees() { return _userService.GetEmployees();}
+    // Получение информации о сотруднике по его идентификатору
+    public Employee GetEmployeeById(int id) { return _userService.GetEmployeeById(id); }
 
-    public void UpdateEmployee(Employee employee) { _userService.UpdateEmployee(employee);}
+    // Получение информации о сотруднике по его email
+    public Employee GetEmployeeByEmail(string email) { return _userService.GetEmployeeByEmail(email); }
 
-    public void DeleteEmployee(Employee employee) { _userService.DeleteEmployee(employee);}
+    // Получение списка сотрудников по идентификатору отдела
+    public List<Employee> GetEmployeesByDepartmentId(int departmentId) { return _userService.GetEmployeesByDepartmentId(departmentId); }
 
-    public Employee GetEmployeeById(int id) { return _userService.GetEmployeeById(id);}
+    // Получение списка сотрудников по идентификатору должности
+    public List<Employee> GetEmployeesByPositionId(int positionId) { return _userService.GetEmployeesByPositionId(positionId); }
 
-    public Employee GetEmployeeByEmail(string email) { return _userService.GetEmployeeByEmail(email);}
+    // Получение списка сотрудников по идентификатору проекта
+    public List<Employee> GetEmployeesByProjectId(int projectId) { return _userService.GetEmployeesByProjectId(projectId); }
 
-    public List<Employee> GetEmployeesByDepartmentId(int departmentId) { return _userService.GetEmployeesByDepartmentId(departmentId);}
-
-    // public List<Department> GetDepartments() { return departments;}  
-
-    public List<Employee> GetEmployeesByPositionId(int positionId) { return _userService.GetEmployeesByPositionId(positionId);}
-
-    public List<Employee> GetEmployeesByProjectId(int projectId) { return _userService.GetEmployeesByProjectId(projectId);}
-
-    public void attendWork(int employeeid) { _userService.attendWork(employeeid);}
+    // Отметка о посещении сотрудником работы
+    public void attendWork(int employeeid) { _userService.attendWork(employeeid); }
 
 }

@@ -24,7 +24,9 @@ public class UserService
 
     public void AddEmployee(Employee user) {
             if (CheckExistance(user.email))
+            {
                 return;
+            }
             
             user.employeeid = GetLastId() + 1;
             _queryProxy.Create().Query()

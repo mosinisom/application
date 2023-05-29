@@ -2,7 +2,12 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:vm="using:application.ViewModels"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:conv="using:applicaton.Converter"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:Class="application.Views.MainWindow" Icon="/Assets/avalonia-logo.ico" Title="application">
+
+  <Window.Resources>
+    <conv:StringToDateTimeConverter x:Key="StringToDateTimeConverter"/>
+  </Window.Resources>
 
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
@@ -40,7 +45,7 @@
     <!-- добавление нового сотрудника -->
     <TabItem>
       <TabItem.Header>
-        <TextBlock VerticalAlignment="Center">Новый сотрудник</TextBlock>
+        <TextBlock VerticalAlignment="Center">Добавление сотрудника</TextBlock>
       </TabItem.Header>
       <StackPanel>
         <TextBlock Text="First Name:"/>
@@ -52,9 +57,9 @@
         <TextBlock Text="Phone Number:"/>
         <TextBox Text="{Binding NewEmployee.phonenumber, Mode=TwoWay}"/>
         <TextBlock Text="Date of Birth:"/>
-        <!-- <DatePicker SelectedDate="{Binding NewEmployee.dateofbirth, Mode=TwoWay}"/> -->
+        <DatePicker SelectedDate="{Binding NewEmployee.dateofbirth, Converter={StaticResource StringToDateTimeConverter}}"/>
         <TextBlock Text="Hire Date:"/>
-        <!-- <DatePicker SelectedDate="{Binding NewEmployee.hiredate, Mode=TwoWay}"/> -->
+        <DatePicker SelectedDate="{Binding NewEmployee.hiredate, Mode=TwoWay}"/>
         <TextBlock Text="Department ID:"/>
         <TextBox Text="{Binding NewEmployee.departmentid, Mode=TwoWay}"/>
         <TextBlock Text="Position ID:"/>
