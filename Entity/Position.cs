@@ -1,6 +1,6 @@
 public class Position
 {
-    public int PositionID { get; set; }
-    public string PositionName { get; set; }
-    public int ObeyTo { get; set; }
+    public int positionid { get; set; }
+    public string positionname { get; set; }
+    public int obeyto { get; set; }
 }

@@ -1,8 +1,8 @@
 public class ProjectParticipation
 {
-    public int ParticipationID { get; set; }
-    public int EmployeeID { get; set; }
-    public int ProjectID { get; set; }
-    public System.DateTime StartDate { get; set; }
-    public System.DateTime EndDate { get; set; }
+    public int participationid { get; set; }
+    public int employeeid { get; set; }
+    public int projectid { get; set; }
+    public System.DateTime startdate { get; set; }
+    public System.DateTime enddate { get; set; }
 }

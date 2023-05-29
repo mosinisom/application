@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reactive;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 using ReactiveUI;
 
 namespace application.ViewModels;
@@ -11,15 +15,16 @@ public class MainWindowViewModel : ViewModelBase
     private string _selectedEmail = "alexmosin@inbox.ru";
     public string email { get; set; } = "alexmosin@inbox.ru";
     private readonly Data _data;
-
-
-
+    public Employee _newEmployee = new Employee();
 
 
     public MainWindowViewModel(Data data)
     {
         _data = data;
         EmployeeItems = _data.GetEmployees();
+
+        NewEmployee.dateofbirth = DateTime.Now - TimeSpan.FromDays(365 * 18);
+        NewEmployee.hiredate = DateTime.Now;
     }
 
     public string MyData
@@ -35,7 +40,7 @@ public class MainWindowViewModel : ViewModelBase
             List<string> emails = new List<string>();
             foreach (var item in EmployeeItems)
             {
-                emails.Add(item.Email);
+                emails.Add(item.email);
             }
             return emails;
         }
@@ -51,20 +56,18 @@ public class MainWindowViewModel : ViewModelBase
     public string SelectedEmail
     {
         get => _selectedEmail;
-        set {
+        set
+        {
             this.RaiseAndSetIfChanged(ref _selectedEmail, value);
             UpdateSelectedEmployee();
         }
     }
 
-
     private void UpdateSelectedEmployee()
     {
-        SelectedEmployee = EmployeeItems.Find(x => x.Email == SelectedEmail);
-        _data.attendWork(SelectedEmployee.EmployeeID);
+        SelectedEmployee = EmployeeItems.Find(x => x.email == SelectedEmail);
+        _data.attendWork(SelectedEmployee.employeeid);
     }
-     
-    
 
 
     public Employee SelectedEmployee
@@ -72,4 +75,46 @@ public class MainWindowViewModel : ViewModelBase
         get => _selectedEmployee;
         set => this.RaiseAndSetIfChanged(ref _selectedEmployee, value);
     }
+
+    // добавить нового сотрудника
+    public Employee NewEmployee
+    {
+        get => _newEmployee;
+        set => this.RaiseAndSetIfChanged(ref _newEmployee, value);
+    }
+
+    public void AddEmployee()
+    {
+        if (!CanAddEmployee())
+            return;
+
+        _data.AddEmployee(NewEmployee);
+        EmployeeItems = _data.GetEmployees();
+        NewEmployee = new Employee();
+    }
+
+    private bool CanAddEmployee()
+    {
+        if (NewEmployee.email.Length == 0)
+            return false;
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

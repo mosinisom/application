@@ -1,68 +1,79 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:application.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="application.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="application">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:application.ViewModels"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:Class="application.Views.MainWindow" Icon="/Assets/avalonia-logo.ico" Title="application">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
 
 
 
   <TabControl>
-  <TabItem Header="Отметка" VerticalContentAlignment="Center">
+    <TabItem Header="Отметка" VerticalContentAlignment="Center">
 
-        <StackPanel Orientation="Vertical" Spacing="4">
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+      <StackPanel Orientation="Vertical" Spacing="4">
+        <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-    <WrapPanel HorizontalAlignment="Center" Margin="0 16 0 0"
-               MaxWidth="660">
-      <WrapPanel.Styles>
-        <Style Selector="ComboBox">
-          <Setter Property="Width" Value="350" />
-          <Setter Property="Margin" Value="10" />
-        </Style>
-      </WrapPanel.Styles>
-      <ComboBox PlaceholderText="Отметься на работе сегодня?"
-            SelectedIndex="0" 
-            Items="{Binding emails}"              
-            SelectedItem="{Binding SelectedEmail}">
-      </ComboBox>
+        <WrapPanel HorizontalAlignment="Center" Margin="0 16 0 0" MaxWidth="660">
+          <WrapPanel.Styles>
+            <Style Selector="ComboBox">
+              <Setter Property="Width" Value="350" />
+              <Setter Property="Margin" Value="10" />
+            </Style>
+          </WrapPanel.Styles>
+          <ComboBox PlaceholderText="Отметься на работе сегодня?" SelectedIndex="0" Items="{Binding emails}" SelectedItem="{Binding SelectedEmail}">
+          </ComboBox>
 
 
-    </WrapPanel>
-      <!-- show selectedEmployee -->
+        </WrapPanel>
+        <!-- show selectedEmployee -->
         <TextBlock Text="{Binding SelectedEmail}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-  </StackPanel>
+      </StackPanel>
+    </TabItem>
 
-  </TabItem>
-  <TabItem>
-    <TabItem.Header>
-      <TextBlock VerticalAlignment="Center">Triangle</TextBlock>
-    </TabItem.Header>
-    <StackPanel>
-      <TextBlock Text="I am in the triangle page ! I'll put a button to show you that each page contains what you want." HorizontalAlignment="Left" VerticalAlignment="Center"/>
-      <Button>A button in the triangle page !</Button>
-    </StackPanel>
-  </TabItem>
-  <TabItem>
-    <TabItem.Header>
-      <TextBlock VerticalAlignment="Center">Square</TextBlock>
-    </TabItem.Header>
-    <StackPanel Orientation="Horizontal">
-      <TextBlock Text="Square : " HorizontalAlignment="Left" VerticalAlignment="Center"/>
-      <Rectangle Fill="Blue" Width="63" Height="41"/>              
-    </StackPanel>
-  </TabItem>
-</TabControl>
+    <!-- добавление нового сотрудника -->
+    <TabItem>
+      <TabItem.Header>
+        <TextBlock VerticalAlignment="Center">Новый сотрудник</TextBlock>
+      </TabItem.Header>
+      <StackPanel>
+        <TextBlock Text="First Name:"/>
+        <TextBox Text="{Binding NewEmployee.firstname, Mode=TwoWay}"/>
+        <TextBlock Text="Last Name:"/>
+        <TextBox Text="{Binding NewEmployee.lastname, Mode=TwoWay}"/>
+        <TextBlock Text="Email:"/>
+        <TextBox Text="{Binding NewEmployee.email, Mode=TwoWay}"/>
+        <TextBlock Text="Phone Number:"/>
+        <TextBox Text="{Binding NewEmployee.phonenumber, Mode=TwoWay}"/>
+        <TextBlock Text="Date of Birth:"/>
+        <!-- <DatePicker SelectedDate="{Binding NewEmployee.dateofbirth, Mode=TwoWay}"/> -->
+        <TextBlock Text="Hire Date:"/>
+        <!-- <DatePicker SelectedDate="{Binding NewEmployee.hiredate, Mode=TwoWay}"/> -->
+        <TextBlock Text="Department ID:"/>
+        <TextBox Text="{Binding NewEmployee.departmentid, Mode=TwoWay}"/>
+        <TextBlock Text="Position ID:"/>
+        <TextBox Text="{Binding NewEmployee.positionid, Mode=TwoWay}"/>
+        <Button Content="Create" Command="{Binding AddEmployee}"/>
+      </StackPanel>
+    </TabItem>
+
+
+    <!-- другая страница -->
+    <TabItem>
+      <TabItem.Header>
+        <TextBlock VerticalAlignment="Center">Square</TextBlock>
+      </TabItem.Header>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Square : " HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Rectangle Fill="Blue" Width="63" Height="41"/>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
 
 </Window>

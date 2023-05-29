@@ -18,7 +18,7 @@ class PostgresProxy : IDBQueryProxy
     public QueryFactory Create() =>
         new QueryFactory(
             //new NpgsqlConnection(_userServiceSettings.ConnectionString),
-            new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=work;User Id=postgres;Password=eder432;"),
+            new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=company;User Id=postgres;Password=eder432;"),
             compiler
         );
 }

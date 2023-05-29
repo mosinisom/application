@@ -17,10 +17,20 @@ public class UserService
             .Where("email", email)
             .Exists();
 
-    public void AddEmployee(Employee user) =>
+    public int GetLastId() =>
         _queryProxy.Create().Query()
             .From("employees")
-            .Insert(user);
+            .Max<int>("employeeid");
+
+    public void AddEmployee(Employee user) {
+            if (CheckExistance(user.email))
+                return;
+            
+            user.employeeid = GetLastId() + 1;
+            _queryProxy.Create().Query()
+                .From("employees")
+                .Insert(user);
+    }
 
     public List<Employee> GetEmployees() =>
         _queryProxy.Create().Query()
@@ -28,21 +38,18 @@ public class UserService
             .Get<Employee>().ToList();
 
 
-    public void UpdateEmployee(Employee employee)
-    {
+    public void UpdateEmployee(Employee employee) =>
         _queryProxy.Create().Query()
             .From("employees")
-            .Where("employeeid", employee.EmployeeID)
+            .Where("employeeid", employee.employeeid)
             .Update(employee);
-    }
 
-    public void DeleteEmployee(Employee employee)
-    {
+    public void DeleteEmployee(Employee employee) =>
         _queryProxy.Create().Query()
             .From("employees")
-            .Where("employeeid", employee.EmployeeID)
+            .Where("employeeid", employee.employeeid)
             .Delete();
-    }
+    
 
     public Employee GetEmployeeById(int id) =>
         _queryProxy.Create().Query()

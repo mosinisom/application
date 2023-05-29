@@ -1,7 +1,7 @@
 public class Project
 {
-    public int ProjectID { get; set; }
-    public string ProjectName { get; set; }
-    public System.DateTime StartDate { get; set; }
-    public System.DateTime EndDate { get; set; }
+    public int projectid { get; set; }
+    public string projectname { get; set; }
+    public System.DateTime startdate { get; set; }
+    public System.DateTime enddate { get; set; }
 }
