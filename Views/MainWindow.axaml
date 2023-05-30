@@ -2,12 +2,12 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:vm="using:application.ViewModels"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:conv="using:applicaton.Converter"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:Class="application.Views.MainWindow" Icon="/Assets/avalonia-logo.ico" Title="application">
 
-  <Window.Resources>
+  <!-- xmlns:conv="using:applicaton.Converter" -->
+  <!-- <Window.Resources>
     <conv:StringToDateTimeConverter x:Key="StringToDateTimeConverter"/>
-  </Window.Resources>
+  </Window.Resources> -->
 
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
@@ -57,7 +57,7 @@
         <TextBlock Text="Phone Number:"/>
         <TextBox Text="{Binding NewEmployee.phonenumber, Mode=TwoWay}"/>
         <TextBlock Text="Date of Birth:"/>
-        <DatePicker SelectedDate="{Binding NewEmployee.dateofbirth, Converter={StaticResource StringToDateTimeConverter}}"/>
+        <!-- <DatePicker SelectedDate="{Binding NewEmployee.dateofbirth, Converter={StaticResource StringToDateTimeConverter}}"/> -->
         <TextBlock Text="Hire Date:"/>
         <DatePicker SelectedDate="{Binding NewEmployee.hiredate, Mode=TwoWay}"/>
         <TextBlock Text="Department ID:"/>
@@ -68,17 +68,26 @@
       </StackPanel>
     </TabItem>
 
-
-    <!-- другая страница -->
+    <!-- отделы -->
     <TabItem>
       <TabItem.Header>
-        <TextBlock VerticalAlignment="Center">Square</TextBlock>
+        <TextBlock VerticalAlignment="Center">Отделы</TextBlock>
       </TabItem.Header>
-      <StackPanel Orientation="Horizontal">
-        <TextBlock Text="Square : " HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Rectangle Fill="Blue" Width="63" Height="41"/>
+      <!-- добавить новый отдел  -->
+      <StackPanel>
+        <TextBlock Text="Название отдела:"/>
+        <TextBox Text="{Binding NewDepartment.departmentname, Mode=TwoWay}"/>
+        <Button Content="Добавить" Command="{Binding AddDepartment}"/>
+
+        <!-- make a gap or margin and show a lost of departments -->
+        <TextBlock Text="Список отделов:" Margin="0 16 0 0"/>
+        <ListBox Items="{Binding Departments}"/>
+
       </StackPanel>
     </TabItem>
-  </TabControl>
 
+
+
+
+  </TabControl>
 </Window>

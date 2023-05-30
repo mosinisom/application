@@ -34,20 +34,84 @@ public class UtilService
             .Select("projectparticipations.projectid", "projects.projectname", "projectparticipations.startdate", "projectparticipations.enddate", "employees.firstname", "employees.lastname")
             .Get<object>().ToList();
 
-    public void AddNewDepartment(Department department) =>
+public int GetLastDepartmentId() =>
+    _queryProxy.Create().Query()
+        .From("departments")
+        .Max<int>("departmentid");
+
+public void AddNewDepartment(Department department)
+{
+    department.departmentid = GetLastDepartmentId() + 1;
+    _queryProxy.Create().Query()
+        .From("departments")
+        .Insert(department);
+}
+
+public int GetLastPositionId() =>
+    _queryProxy.Create().Query()
+        .From("positions")
+        .Max<int>("positionid");
+
+public void AddNewPosition(Position position)
+{
+    position.positionid = GetLastPositionId() + 1;
+    _queryProxy.Create().Query()
+        .From("positions")
+        .Insert(position);
+}
+
+public int GetLastProjectId() =>
+    _queryProxy.Create().Query()
+        .From("projects")
+        .Max<int>("projectid");
+
+public void AddNewProject(Project project)
+{
+    project.projectid = GetLastProjectId() + 1;
+    _queryProxy.Create().Query()
+        .From("projects")
+        .Insert(project);
+}
+
+public int GetLastProjectParticipationId() =>
+    _queryProxy.Create().Query()
+        .From("projectparticipations")
+        .Max<int>("projectparticipationid");
+
+public void AddNewProjectParticipation(ProjectParticipation projectParticipation)
+{
+    projectParticipation.participationid = GetLastProjectParticipationId() + 1;
+    _queryProxy.Create().Query()
+        .From("projectparticipations")
+        .Insert(projectParticipation);
+}
+
+    public void UpdateDepartment(Department department) =>
         _queryProxy.Create().Query()
             .From("departments")
-            .Insert(department);
+            .Where("departmentid", department.departmentid)
+            .Update(department);
 
-    public void AddNewPosition(Position position) =>
+    public void UpdatePosition(Position position) =>
         _queryProxy.Create().Query()
             .From("positions")
-            .Insert(position);
+            .Where("positionid", position.positionid)
+            .Update(position);
 
-    public void AddNewProject(Project project) =>
+    public void UpdateProject(Project project) =>
         _queryProxy.Create().Query()
             .From("projects")
-            .Insert(project);
+            .Where("projectid", project.projectid)
+            .Update(project);
+
+    public void UpdateProjectParticipation(ProjectParticipation projectParticipation) =>
+        _queryProxy.Create().Query()
+            .From("projectparticipations")
+            .Where("projectid", projectParticipation.projectid)
+            .Where("employeeid", projectParticipation.employeeid)
+            .Update(projectParticipation);
+
+            
 
 
 

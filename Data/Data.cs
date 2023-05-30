@@ -11,11 +11,13 @@ public class Data
     // List<Project> projects = new List<Project>();
     // List<ProjectParticipation> projectParticipations = new List<ProjectParticipation>();
 
-    public Data(UserService userService)
+    public Data(UserService userService, UtilService utilService)
     {
         _userService = userService;
+        _utilService = utilService;
     }
 
+// СОТРУДНИКИ -------------------------------------------------------------------------------------------
     // Проверка на существование пользователя с таким email
     public bool CheckExistance(string email) { return _userService.CheckExistance(email); }
 
@@ -48,5 +50,25 @@ public class Data
 
     // Отметка о посещении сотрудником работы
     public void attendWork(int employeeid) { _userService.attendWork(employeeid); }
+
+// РАБОТА -------------------------------------------------------------------------------
+
+    // добавить новый отдел
+    public void AddDepartment(Department department) { _utilService.AddNewDepartment(department); }
+
+    // получить список всех отделов
+    public List<Department> GetDepartments() { return _utilService.GetDepartments(); }
+
+    // добавить новую должность
+    public void AddPosition(Position position) { _utilService.AddNewPosition(position); }
+
+    // получить список всех должностей
+    public List<Position> GetPositions() { return _utilService.GetPositions(); }
+
+    // добавить новый проект
+    public void AddProject(Project project) { _utilService.AddNewProject(project); }
+
+    // получить список всех проектов
+    public List<Project> GetProjects() { return _utilService.GetProjects(); }
 
 }
