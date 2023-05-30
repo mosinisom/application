@@ -40,6 +40,7 @@ public partial class App : Application
 
         services.AddTransient<IDBQueryProxy, PostgresProxy>();
         services.AddTransient<UserService>();
+        services.AddTransient<UtilService>();
         services.AddTransient<Data>();
         services.AddTransient<MainWindowViewModel>();
         return services;
