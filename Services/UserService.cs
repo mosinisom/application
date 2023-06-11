@@ -93,5 +93,13 @@ public class UserService
                 attendancedate = System.DateTime.Now
             });
 
+    public int GetAllAttendancesByEmployeeId(int employeeId) =>
+        _queryProxy.Create().Query()
+            .From("employeeattendance")
+            .Where("employeeid", employeeId)
+            .Count<int>();
+
+
+
 
 }
